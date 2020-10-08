@@ -10,6 +10,8 @@ import org.softwire.training.api.integration.helper.WebDriverHelper;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+//tests that users signed in as admin can view, edit and add regions
+
 public class AdminRegionsIT {
     public static final String TARGET_ADDRESS = System.getProperty("target.address");
 
@@ -21,17 +23,29 @@ public class AdminRegionsIT {
     }
 
     @Test
-    public void testCanLogIn() {
+    public void testAdminCanSeeRegions() {
         driver.get(TARGET_ADDRESS);
         LoginHelper.ensureLoggedIn(driver);
         LoginHelper.login(driver);
+        driver.get(TARGET_ADDRESS + "/#/admin/regions");
 
         WebElement navBarRight = driver.findElement(By.className("navbar-right"));
         assertTrue(navBarRight.getText().contains("Log Out"));
     }
 
     @Test
-    public void testCanLogOut() {
+    public void testAdminCanEditRegion() {
+        driver.get(TARGET_ADDRESS);
+        LoginHelper.ensureLoggedIn(driver);
+        LoginHelper.login(driver);
+        driver.get(TARGET_ADDRESS + "/#/admin/regions/edit/1");
+    }
 
+    @Test
+    public void testAdminCanAddRegion() {
+        driver.get(TARGET_ADDRESS);
+        LoginHelper.ensureLoggedIn(driver);
+        LoginHelper.login(driver);
+        driver.get(TARGET_ADDRESS + "/#/admin/regions/add");
     }
 }
