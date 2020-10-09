@@ -37,9 +37,7 @@ export default class LocationReportSubmit extends React.Component {
             <div className='col-md-8 col-md-offset-2'>
                 <Form onSubmit={this.onSubmit}>
                     <h3>Submit Location Report</h3>
-
                     <Messages messages={this.state.messages}/>
-
                     <FormGroup>
                         <ControlLabel>Location</ControlLabel>
                         <FormControl componentClass='select' required
@@ -52,12 +50,20 @@ export default class LocationReportSubmit extends React.Component {
                         </FormControl>
                     </FormGroup>
                     <FormGroup>
+                        <ControlLabel>Title</ControlLabel>
+                        <FormControl type='text' required
+                            placeholder='Enter a title'
+                            value={this.state.status}
+                            onChange={this.onTitleChange}
+                            id="title-input"/>
+                    </FormGroup>
+                    <FormGroup>
                         <ControlLabel>Status</ControlLabel>
                         <FormControl type='number' required
-                            placeholder='Enter numeric status code'
-                            value={this.state.status}
-                            onChange={this.onStatusChange}
-                            id="status-input"/>
+                             placeholder='Enter numeric status code'
+                             value={this.state.status}
+                             onChange={this.onStatusChange}
+                             id="status-input"/>
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Report</ControlLabel>
@@ -79,6 +85,10 @@ export default class LocationReportSubmit extends React.Component {
                 </Form>
             </div>
         );
+    }
+
+    onTitleChange(event) {
+        this.setState({ title: event.target.value });
     }
 
     onLocationChange(event) {
@@ -103,6 +113,7 @@ export default class LocationReportSubmit extends React.Component {
         this.setState({ messages: [] });
 
         const body = {
+            title: this.state.title,
             locationId: this.state.locationId,
             status: this.state.status,
             reportBody: this.state.reportBody,
