@@ -8,6 +8,7 @@ package org.softwire.training.api.models;
 public class LocationStatusReportApiModel extends ReportApiModelBase {
 
     private int locationId;
+    private String title;
 
     public int getLocationId() {
         return locationId;
@@ -15,5 +16,13 @@ public class LocationStatusReportApiModel extends ReportApiModelBase {
 
     public void setLocationId(int locationId) {
         this.locationId = locationId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

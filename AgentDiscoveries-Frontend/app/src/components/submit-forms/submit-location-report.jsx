@@ -10,7 +10,7 @@ export default class LocationReportSubmit extends React.Component {
 
         this.state = {
             locations: [],
-
+            title: '',
             locationId: '',
             status: '',
             reportBody: '',
@@ -19,6 +19,7 @@ export default class LocationReportSubmit extends React.Component {
             messages: []
         };
 
+        this.onTitleChange = this.onTitleChange.bind(this);
         this.onLocationChange = this.onLocationChange.bind(this);
         this.onStatusChange = this.onStatusChange.bind(this);
         this.onReportBodyChange = this.onReportBodyChange.bind(this);
@@ -37,9 +38,15 @@ export default class LocationReportSubmit extends React.Component {
             <div className='col-md-8 col-md-offset-2'>
                 <Form onSubmit={this.onSubmit}>
                     <h3>Submit Location Report</h3>
-
                     <Messages messages={this.state.messages}/>
-
+                    <FormGroup>
+                        <ControlLabel>Title</ControlLabel>
+                        <FormControl type='text' required
+                            placeholder='Enter a title'
+                            value={this.state.title}
+                            onChange={this.onTitleChange}
+                            id="title-input"/>
+                    </FormGroup>
                     <FormGroup>
                         <ControlLabel>Location</ControlLabel>
                         <FormControl componentClass='select' required
@@ -81,6 +88,10 @@ export default class LocationReportSubmit extends React.Component {
         );
     }
 
+    onTitleChange(event) {
+        this.setState({ title: event.target.value });
+    }
+
     onLocationChange(event) {
         this.setState({ locationId: event.target.value && parseInt(event.target.value) });
     }
@@ -106,7 +117,8 @@ export default class LocationReportSubmit extends React.Component {
             locationId: this.state.locationId,
             status: this.state.status,
             reportBody: this.state.reportBody,
-            sendExternal: this.state.sendExternal
+            sendExternal: this.state.sendExternal,
+            title: this.state.title
         };
 
         apiPost('reports/locationstatuses', body)
