@@ -12,12 +12,10 @@ import org.softwire.training.models.Location;
 import org.softwire.training.models.LocationStatusReport;
 import spark.QueryParamsMap;
 import spark.Request;
+import spark.utils.StringUtils;
 
 import javax.inject.Inject;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +39,9 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
     @Override
     protected LocationStatusReport validateThenMap(LocationStatusReportApiModel apiModel) {
         // Ignore any supplied report time
+
+        validateLocationStatusReportModel(apiModel);
+
         LocalDateTime reportTimeUtc = LocalDateTime.now(ZoneOffset.UTC);
 
         LocationStatusReport model = new LocationStatusReport();
@@ -77,6 +78,12 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
         apiModel.setReportBody(model.getReportBody());
 
         return apiModel;
+    }
+
+    private void validateLocationStatusReportModel(LocationStatusReportApiModel locationStatusReport) {
+        if (locationStatusReport.getStatus() > 100 || locationStatusReport.getStatus() < 0) {
+            throw new FailedRequestException(ErrorCode.INVALID_INPUT, "status is out of range");
+        }
     }
 
     @Override
