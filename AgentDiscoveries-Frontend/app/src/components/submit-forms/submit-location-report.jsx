@@ -10,7 +10,7 @@ export default class LocationReportSubmit extends React.Component {
 
         this.state = {
             locations: [],
-
+            title: '',
             locationId: '',
             status: '',
             reportBody: '',
@@ -19,6 +19,7 @@ export default class LocationReportSubmit extends React.Component {
             messages: []
         };
 
+        this.onTitleChange = this.onTitleChange.bind(this);
         this.onLocationChange = this.onLocationChange.bind(this);
         this.onStatusChange = this.onStatusChange.bind(this);
         this.onReportBodyChange = this.onReportBodyChange.bind(this);
@@ -39,6 +40,14 @@ export default class LocationReportSubmit extends React.Component {
                     <h3>Submit Location Report</h3>
                     <Messages messages={this.state.messages}/>
                     <FormGroup>
+                        <ControlLabel>Title</ControlLabel>
+                        <FormControl type='text' required
+                            placeholder='Enter a title'
+                            value={this.state.title}
+                            onChange={this.onTitleChange}
+                            id="title-input"/>
+                    </FormGroup>
+                    <FormGroup>
                         <ControlLabel>Location</ControlLabel>
                         <FormControl componentClass='select' required
                             value={this.state.locationId}
@@ -50,20 +59,12 @@ export default class LocationReportSubmit extends React.Component {
                         </FormControl>
                     </FormGroup>
                     <FormGroup>
-                        <ControlLabel>Title</ControlLabel>
-                        <FormControl type='text' required
-                            placeholder='Enter a title'
-                            value={this.state.status}
-                            onChange={this.onTitleChange}
-                            id="title-input"/>
-                    </FormGroup>
-                    <FormGroup>
                         <ControlLabel>Status</ControlLabel>
                         <FormControl type='number' required
-                             placeholder='Enter numeric status code'
-                             value={this.state.status}
-                             onChange={this.onStatusChange}
-                             id="status-input"/>
+                            placeholder='Enter numeric status code'
+                            value={this.state.status}
+                            onChange={this.onStatusChange}
+                            id="status-input"/>
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Report</ControlLabel>
@@ -113,11 +114,11 @@ export default class LocationReportSubmit extends React.Component {
         this.setState({ messages: [] });
 
         const body = {
-            title: this.state.title,
             locationId: this.state.locationId,
             status: this.state.status,
             reportBody: this.state.reportBody,
-            sendExternal: this.state.sendExternal
+            sendExternal: this.state.sendExternal,
+            title: this.state.title
         };
 
         apiPost('reports/locationstatuses', body)
