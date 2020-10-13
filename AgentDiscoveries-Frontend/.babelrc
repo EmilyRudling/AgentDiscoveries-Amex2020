@@ -1,6 +1,6 @@
 {
   "presets": [
-    "react", "env", "es2015", "stage-0"
+    "react", "env"
   ],
   "env":{
     "test":{

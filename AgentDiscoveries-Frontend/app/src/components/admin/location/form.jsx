@@ -42,7 +42,7 @@ export default ({ id }) => {
     const loadLocation = async () => {
         try {
             const location = await apiGet('locations', id);
-            setValues({ ...values, ...location });
+            setValues(Object.assign(values, location));
         } catch (error) {
             handleError(error);
         }
@@ -77,7 +77,7 @@ export default ({ id }) => {
     const handleChange = ({ target }) => {
         const { name, value } = target;
 
-        setValues({ ...values, [name]: value });
+        setValues(Object.assign(values, {[name]: value}));
     };
 
     return (
