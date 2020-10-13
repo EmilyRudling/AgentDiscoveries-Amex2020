@@ -7,25 +7,13 @@ import {FormRow, StyledFormGroup} from "./form.style";
 import DegreeDirection from './degree-direction';
 import GoogleMap from './google-map';
 
-const VALUES_INITIAL_STATE = {
-    siteName: '',
-    location: '',
-    timeZone: '',
-    regionId: '',
-    latitude: '',
-    longitude: ''
-}
-
 export default ({ id }) => {
-    const [values, setValues] = useState(VALUES_INITIAL_STATE);
-    const {
-        siteName,
-        location,
-        timeZone,
-        regionId,
-        latitude,
-        longitude
-    } = values;
+    const [siteName, setSiteName] = useState('');
+    const [location, setLocation] = useState('');
+    const [timeZone, setTimeZone] = useState('');
+    const [regionId, setRegionId] = useState('');
+    const [longitude, setLongitude] = useState('');
+    const [latitude, setLatitude] = useState('');
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -42,7 +30,12 @@ export default ({ id }) => {
     const loadLocation = async () => {
         try {
             const location = await apiGet('locations', id);
-            setValues(Object.assign(values, location));
+            setSiteName(location.siteName);
+            setLocation(location.location);
+            setTimeZone(location.timeZone);
+            setRegionId(location.regionId);
+            setLongitude(location.longitude);
+            setLatitude(location.latitude);
         } catch (error) {
             handleError(error);
         }
@@ -74,12 +67,6 @@ export default ({ id }) => {
 
     const handleError = ({ message }) => setError({ message, type: 'danger' });
 
-    const handleChange = ({ target }) => {
-        const { name, value } = target;
-
-        setValues(Object.assign(values, {[name]: value}));
-    };
-
     return (
         <React.Fragment>
             <Message message={error} />
@@ -92,7 +79,7 @@ export default ({ id }) => {
                         name='siteName'
                         value={siteName}
                         required
-                        onChange={handleChange}
+                        onChange={event => setSiteName(event.target.value)}
                     />
                 </FormGroup>
                 <FormGroup>
@@ -102,7 +89,7 @@ export default ({ id }) => {
                         name='location'
                         value={location}
                         required
-                        onChange={handleChange}
+                        onChange={event => setLocation(event.target.value)}
                     />
                 </FormGroup>
                 <FormGroup>
@@ -112,7 +99,7 @@ export default ({ id }) => {
                         name='timeZone'
                         value={timeZone}
                         required
-                        onChange={handleChange}
+                        onChange={event => setTimeZone(event.target.value)}
                     />
                 </FormGroup>
                 <FormGroup>
@@ -123,7 +110,7 @@ export default ({ id }) => {
                         name='regionId'
                         value={regionId}
                         required
-                        onChange={handleChange}
+                        onChange={event => setRegionId(event.target.value)}
                     />
                 </FormGroup>
                 <FormRow>
@@ -135,7 +122,7 @@ export default ({ id }) => {
                                 placeholder='00.000'
                                 name='latitude'
                                 value={latitude}
-                                onChange={handleChange}
+                                onChange={event => setLatitude(event.target.value)}
                             />
                             <DegreeDirection isNorth />
                         </FormRow>
@@ -148,7 +135,7 @@ export default ({ id }) => {
                                 placeholder='00.000'
                                 name='longitude'
                                 value={longitude}
-                                onChange={handleChange}
+                                onChange={event => setLongitude(event.target.value)}
                             />
                             <DegreeDirection />
                         </FormRow>
