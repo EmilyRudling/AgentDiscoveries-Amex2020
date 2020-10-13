@@ -6,7 +6,7 @@ const extractSass = new MiniCssExtractPlugin();
 const outputPath = path.join(__dirname, 'target', 'classes', 'frontend');
 
 module.exports = {
-    entry: ['babel-polyfill', './app/src/index.jsx'],
+    entry: './app/src/index.jsx',
 
     resolve: {
         extensions: ['.js', '.jsx']
