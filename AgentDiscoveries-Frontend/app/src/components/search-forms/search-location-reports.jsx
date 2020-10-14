@@ -3,8 +3,35 @@ import {Button, ControlLabel, Form, FormControl, FormGroup} from 'react-bootstra
 import QueryString from 'query-string';
 import moment from 'moment';
 import Message from '../message';
-import SearchResult from './search-result';
 import {apiGet} from '../utilities/request-helper';
+import ResultsTable from "../common/results-table";
+
+const COLS = [
+    {
+        prop: 'agentId',
+        name: 'Agent ID'
+    },
+    {
+        prop: 'regionId',
+        name: 'Region ID'
+    },
+    {
+        prop: 'reportBody',
+        name: 'Report Body'
+    },
+    {
+        prop: 'reportId',
+        name: 'Report ID'
+    },
+    {
+        prop: 'reportTime',
+        name: 'Report Time'
+    },
+    {
+        prop: 'status',
+        name: 'Status'
+    }
+];
 
 export default class LocationReportsSearch extends React.Component {
     constructor(props) {
@@ -62,7 +89,7 @@ export default class LocationReportsSearch extends React.Component {
                     </FormGroup>
                     <Button type='submit'>Search</Button>
                 </Form>
-                <SearchResult results={this.state.results} />
+                <ResultsTable cols={COLS} items={this.state.results} />
             </div>
         );
     }
