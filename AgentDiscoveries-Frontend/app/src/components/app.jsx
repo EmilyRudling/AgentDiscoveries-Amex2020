@@ -1,65 +1,113 @@
 import * as React from 'react';
-import {HashRouter as Router, Route, Switch} from 'react-router-dom';
+// import {HashRouter as Router, Route, Switch} from 'react-router-dom';
+//
+// import Login from './user/login';
+// import Home from './home';
+// import Page from './page';
+// import Profile from './profile/profile';
+// import EditProfilePicture from './profile/edit-profile-picture';
+// import EditProfileCallSign from './profile/edit-profile-callsign';
+//
+// import LocationReportSearch from './search-forms/search-location-reports';
+// import RegionSummarySearch from './search-forms/search-region-summaries';
+// import LocationReportSubmit from './submit-forms/submit-location-report';
+// import RegionSummarySubmit from './submit-forms/submit-region-summary';
+// import Entities from './admin/entities-view';
+// import TodaysCodePage from './todays-code-page';
+// import Location from './admin/location';
+// import RegionForm from './admin/region-form';
+// import UserForm from './admin/user-form';
+// import Error from './error';
 
-import Login from './user/login';
-import Home from './home';
-import Page from './page';
-import Profile from './profile/profile';
-import EditProfilePicture from './profile/edit-profile-picture';
-import EditProfileCallSign from './profile/edit-profile-callsign';
+const COLS = [
+    {
+        prop: 'name',
+        name: 'Name'
+    }
+];
 
-import LocationReportSearch from './search-forms/search-location-reports';
-import RegionSummarySearch from './search-forms/search-region-summaries';
-import LocationReportSubmit from './submit-forms/submit-location-report';
-import RegionSummarySubmit from './submit-forms/submit-region-summary';
-import Entities from './admin/entities-view';
-import TodaysCodePage from './todays-code-page';
-import Location from './admin/location';
-import RegionForm from './admin/region-form';
-import UserForm from './admin/user-form';
-import Error from './error';
+const ITEMS = [
+    {
+        name: 'Joe'
+    },
+    {
+        name: 'Jack'
+    },
+    {
+        name: 'Ellie'
+    },
+    {
+        name: 'Alice'
+    },
+    {
+        name: 'Ben'
+    },
+    {
+        name: 'Mark'
+    },
+    {
+        name: 'Chris'
+    },
+    {
+        name: 'Alan'
+    },
+    {
+        name: 'Steve'
+    },
+    {
+        name: 'Mike'
+    },
+    {
+        name: 'John'
+    },
+    {
+        name: 'Jane'
+    }
+];
 
 import {apiRequest} from './utilities/request-helper';
+import ResultsTable from "./common/results-table";
 
 const App = () => {
     React.useEffect(() => {
         apiRequest('/locations');
     }, []);
 
-    return (
-        <React.Fragment>
-            <Router>
-                <Switch>
-                    <Route path='/' exact render={() => <Page><Home /></Page>} />
-                    <Route path='/login' render={() => <Page><Login /></Page>} />
-                    <Route path='/search/location' render={() => <Page><LocationReportSearch /></Page>} />
-                    <Route path='/search/region' render={() => <Page><RegionSummarySearch /></Page>} />
-                    <Route path='/submit/location' render={() => <Page><LocationReportSubmit /></Page>} />
-                    <Route path='/submit/region' render={() => <Page><RegionSummarySubmit /></Page>} />
-
-                    <Route path='/admin/locations' exact render={() => <Page><Entities api='locations' key='locations'/></Page>} />
-                    <Route path='/admin/regions' exact render={() => <Page><Entities api='regions' key='regions'/></Page>} />
-                    <Route path='/admin/users' exact render={() => <Page><Entities api='users' key='users'/></Page>} />
-
-                    <Route path='/admin/locations/add' render={() => <Page><Location/></Page>} />
-                    <Route path='/admin/regions/add' render={() => <Page><RegionForm/></Page>} />
-                    <Route path='/admin/users/add' render={() => <Page><UserForm/></Page>} />
-
-                    <Route path='/admin/locations/edit/:id' render={props => <Page><Location id={props.match.params.id} /></Page>} />
-                    <Route path='/admin/regions/edit/:id' render={props => <Page><RegionForm id={props.match.params.id} /></Page>} />
-                    <Route path='/admin/users/edit/:id' render={props => <Page><UserForm id={props.match.params.id} /></Page>} />
-
-                    <Route path='/message' render={() => <Page><TodaysCodePage /></Page>} />
-                    <Route path='/profile' exact render={() => <Page><Profile /></Page>} />
-                    <Route path='/profile/edit/callsign' render={() => <Page><EditProfileCallSign /></Page>} />
-                    <Route path='/profile/edit/picture' render={() => <Page><EditProfilePicture /></Page>} />
-
-                    <Route path='/error' render={() => <Page><Error/></Page>}/>
-                    <Route render={() => <Page><Error/></Page>}/>
-                </Switch>
-            </Router>
-        </React.Fragment>
-    );
+    // return (
+    //     <React.Fragment>
+    //         <Router>
+    //             <Switch>
+    //                 <Route path='/' exact render={() => <Page><Home /></Page>} />
+    //                 <Route path='/login' render={() => <Page><Login /></Page>} />
+    //                 <Route path='/search/location' render={() => <Page><LocationReportSearch /></Page>} />
+    //                 <Route path='/search/region' render={() => <Page><RegionSummarySearch /></Page>} />
+    //                 <Route path='/submit/location' render={() => <Page><LocationReportSubmit /></Page>} />
+    //                 <Route path='/submit/region' render={() => <Page><RegionSummarySubmit /></Page>} />
+    //
+    //                 <Route path='/admin/locations' exact render={() => <Page><Entities api='locations' key='locations'/></Page>} />
+    //                 <Route path='/admin/regions' exact render={() => <Page><Entities api='regions' key='regions'/></Page>} />
+    //                 <Route path='/admin/users' exact render={() => <Page><Entities api='users' key='users'/></Page>} />
+    //
+    //                 <Route path='/admin/locations/add' render={() => <Page><Location/></Page>} />
+    //                 <Route path='/admin/regions/add' render={() => <Page><RegionForm/></Page>} />
+    //                 <Route path='/admin/users/add' render={() => <Page><UserForm/></Page>} />
+    //
+    //                 <Route path='/admin/locations/edit/:id' render={props => <Page><Location id={props.match.params.id} /></Page>} />
+    //                 <Route path='/admin/regions/edit/:id' render={props => <Page><RegionForm id={props.match.params.id} /></Page>} />
+    //                 <Route path='/admin/users/edit/:id' render={props => <Page><UserForm id={props.match.params.id} /></Page>} />
+    //
+    //                 <Route path='/message' render={() => <Page><TodaysCodePage /></Page>} />
+    //                 <Route path='/profile' exact render={() => <Page><Profile /></Page>} />
+    //                 <Route path='/profile/edit/callsign' render={() => <Page><EditProfileCallSign /></Page>} />
+    //                 <Route path='/profile/edit/picture' render={() => <Page><EditProfilePicture /></Page>} />
+    //
+    //                 <Route path='/error' render={() => <Page><Error/></Page>}/>
+    //                 <Route render={() => <Page><Error/></Page>}/>
+    //             </Switch>
+    //         </Router>
+    //     </React.Fragment>
+    // );
+    return <ResultsTable cols={COLS} items={ITEMS}  />
 };
 
 export default App;
