@@ -22,6 +22,8 @@ const ResultsTable = ({cols, items}) => {
         );
     };
 
+    if (!items.length) return null;
+
     return (
         <div>
             <Table responsive hover>
