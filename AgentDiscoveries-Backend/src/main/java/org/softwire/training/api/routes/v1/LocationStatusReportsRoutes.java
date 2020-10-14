@@ -75,6 +75,7 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
         apiModel.setStatus(model.getStatus());
         apiModel.setReportTime(model.getReportTime().atZone(locationTimeZone));
         apiModel.setReportBody(model.getReportBody());
+        apiModel.setTitle(model.getTitle());
 
         return apiModel;
     }
