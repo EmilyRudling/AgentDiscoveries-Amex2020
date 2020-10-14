@@ -12,7 +12,7 @@ const ResultsTable = ({cols, items}) => {
 
     const handleChangePage = currentItems => setCurrentItems(currentItems);
 
-    const renderHeader = ({prop, name}) => <Cell key={prop} children={name} />;
+    const renderHeader = ({prop, name}) => <Cell key={prop} isHeader children={name} />;
 
     const renderRow = (item, index) => {
         return (
@@ -24,7 +24,7 @@ const ResultsTable = ({cols, items}) => {
 
     return (
         <div>
-            <Table>
+            <Table responsive hover>
                 <thead>
                     <tr>{cols.map(renderHeader)}</tr>
                 </thead>
