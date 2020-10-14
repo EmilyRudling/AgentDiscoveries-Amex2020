@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Pager } from 'react-bootstrap';
 
 const Pagination = ({ items, initialPage = 1, pageSize = 10, onChangePage }) => {
 
@@ -63,25 +64,15 @@ const Pagination = ({ items, initialPage = 1, pageSize = 10, onChangePage }) => 
     if (!pager.pages || pager.pages.length <= 1) return null;
 
     return (
-        <ul>
-            <li>
-                <a onClick={() => setPage(1)}>First</a>
-            </li>
-            <li>
-                <a onClick={() => setPage(pager.currentPage - 1)}>Previous</a>
-            </li>
+        <Pager>
+            <Pager.Item href="#" onClick={() => setPage(1)} disabled={pager.currentPage === 1}>First</Pager.Item>
+            <Pager.Item href="#" onClick={() => setPage(pager.currentPage - 1)} disabled={pager.currentPage === 1}>Previous</Pager.Item>
             {pager.pages.map((page, index) => (
-                <li key={index}>
-                    <a onClick={() => setPage(page)}>{page}</a>
-                </li>
+                <Pager.Item key={index} href="#" onClick={() => setPage(page)} disabled={pager.currentPage === page}>{page}</Pager.Item>
             ))}
-            <li>
-                <a onClick={() => setPage(pager.currentPage + 1)}>Next</a>
-            </li>
-            <li>
-                <a onClick={() => setPage(pager.totalPages)}>Last</a>
-            </li>
-        </ul>
+            <Pager.Item href="#" onClick={() => setPage(pager.currentPage + 1)} disabled={pager.currentPage === pager.totalPages}>Next</Pager.Item>
+            <Pager.Item href="#" onClick={() => setPage(pager.totalPages)} disabled={pager.currentPage === pager.totalPages}>Last</Pager.Item>
+        </Pager>
     );
 };
 
