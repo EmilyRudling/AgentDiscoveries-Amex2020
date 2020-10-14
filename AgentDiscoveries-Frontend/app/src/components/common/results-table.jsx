@@ -3,9 +3,37 @@ import { Table } from 'react-bootstrap';
 
 import Pagination from "./pagination";
 
+
 const Cell = ({ isHeader, children }) => {
     return isHeader ? <th>{children}</th> : <td>{children}</td>
 };
+
+/*
+
+    Example
+
+    ----- cols -----
+
+    [
+        {
+            prop: 'age',
+            name: 'Age'
+        },
+        {
+            name: 'Avatar',
+            onRender: (item) => <image src={item.avatar} />
+        }
+    ]
+
+    ----- items ------
+
+    [
+        {
+            age: 19,
+            avatar: 'https://agentdiscoveries/avatars/1.png'
+        }
+    ]
+ */
 
 const ResultsTable = ({cols, items}) => {
     const [currentItems, setCurrentItems] = useState([]);
@@ -17,7 +45,7 @@ const ResultsTable = ({cols, items}) => {
     const renderRow = (item, index) => {
         return (
             <tr key={index}>
-                {cols.map(({prop, onRender}) => <td key={prop}>{onRender ? onRender(item) : item[prop]}</td>)}
+                {cols.map(({prop, onRender}, index) => <td key={index}>{onRender ? onRender(item) : item[prop]}</td>)}
             </tr>
         );
     };
