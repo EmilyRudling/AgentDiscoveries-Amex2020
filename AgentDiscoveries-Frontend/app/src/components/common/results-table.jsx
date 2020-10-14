@@ -17,7 +17,7 @@ const ResultsTable = ({cols, items}) => {
     const renderRow = (item, index) => {
         return (
             <tr key={index}>
-                {cols.map(({prop}) => <td key={prop}>{item[prop]}</td>)}
+                {cols.map(({prop, onRender}) => <td key={prop}>{onRender ? onRender(item) : item[prop]}</td>)}
             </tr>
         );
     };
