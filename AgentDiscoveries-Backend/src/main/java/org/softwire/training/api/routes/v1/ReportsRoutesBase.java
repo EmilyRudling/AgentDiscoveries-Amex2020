@@ -100,11 +100,9 @@ public abstract class ReportsRoutesBase<T extends ReportApiModelBase, U extends 
     public List<T> searchReports(Request req, Response res) {
         permissionsVerifier.verifyAdminPermission(req);
 
-        List<T> test = reportsDao.searchReports(parseSearchCriteria(req))
+        return reportsDao.searchReports(parseSearchCriteria(req))
                 .stream()
                 .map(this::mapToApiModel)
                 .collect(Collectors.toList());
-
-        return test;
     }
 }
