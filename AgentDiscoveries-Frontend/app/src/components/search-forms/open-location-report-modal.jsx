@@ -33,14 +33,17 @@ export default class LocationReportModal extends React.Component {
                         <Modal.Title>Report Title</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <p>
-                            {this.props.item.agentId}
-                            {this.props.item.regionId}
-                            {this.props.item.reportBody}
-                            {this.props.item.reportId}
-                            {this.props.item.reportTime}
-                            {this.props.item.status}
-                        </p>
+                        <h4>Agent ID:</h4>
+                        <p>{this.props.item.agentId}</p>
+                        <h4>Report Body:</h4>
+                        <p>{this.props.item.reportBody}</p>
+                        <h4>Report ID:</h4>
+                        <p>{this.props.item.reportId}</p>
+                        <h4>Time of Report:</h4>
+                        <p>{new Date(this.props.item.reportTime).toLocaleDateString()}</p>
+                        <p>{new Date(this.props.item.reportTime).toLocaleTimeString()}</p>
+                        <h4>Status:</h4>
+                        <p>{this.props.item.status}</p>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.handleClose}>Close</Button>
