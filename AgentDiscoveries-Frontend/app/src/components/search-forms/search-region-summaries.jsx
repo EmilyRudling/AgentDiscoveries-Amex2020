@@ -5,6 +5,7 @@ import moment from 'moment/moment';
 import QueryString from 'query-string';
 import {apiGet} from '../utilities/request-helper';
 import ResultsTable from "../common/results-table";
+import RegionSummariesModal from "./open-region-summaries-modal";
 
 const COLS = [
     {
@@ -30,6 +31,10 @@ const COLS = [
     {
         prop: 'status',
         name: 'Status'
+    },
+    {
+        name: 'More Info',
+        onRender: (item) => <RegionSummariesModal item={item}/>
     }
 ];
 
