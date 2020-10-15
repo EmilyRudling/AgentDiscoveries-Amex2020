@@ -1,7 +1,5 @@
 package org.softwire.training.utils;
 
-//import java.util.stream.IntStream;
-
 public class Pager {
 
     private int totalItems;
