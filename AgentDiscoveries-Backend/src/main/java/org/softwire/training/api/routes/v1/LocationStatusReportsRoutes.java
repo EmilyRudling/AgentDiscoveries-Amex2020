@@ -44,6 +44,8 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
 
         LocalDateTime reportTimeUtc = LocalDateTime.now(ZoneOffset.UTC);
 
+        validateLocationStatusReportModel(apiModel);
+
         LocationStatusReport model = new LocationStatusReport();
         model.setTitle(apiModel.getTitle());
         model.setAgentId(apiModel.getAgentId());
@@ -81,8 +83,8 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
     }
 
     private void validateLocationStatusReportModel(LocationStatusReportApiModel locationStatusReport) {
-        if (locationStatusReport.getStatus() > 100 || locationStatusReport.getStatus() < 0) {
-            throw new FailedRequestException(ErrorCode.INVALID_INPUT, "status is out of range");
+        if ((locationStatusReport.getStatus() > 100) || (locationStatusReport.getStatus() < 0)) {
+            throw new FailedRequestException(ErrorCode.INVALID_INPUT, "status out of range");
         }
     }
 
