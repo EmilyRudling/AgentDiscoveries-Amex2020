@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import {Panel} from 'react-bootstrap';
 
 export default class SearchResult extends React.Component {
 
@@ -16,6 +15,7 @@ export default class SearchResult extends React.Component {
                             <th>Report Time</th>
                             <th>Report Body</th>
                             <th>Agent ID</th>
+                            <th>Title</th>
                         </tr>
                     </thead>
                     <tbody>
