@@ -5,31 +5,36 @@ import moment from 'moment/moment';
 import QueryString from 'query-string';
 import {apiGet} from '../utilities/request-helper';
 import ResultsTable from "../common/results-table";
+import RegionSummariesModal from "./open-region-summaries-modal";
 
 const COLS = [
     {
-        prop: 'agentId',
-        name: 'Agent ID'
+        prop: 'reportId',
+        name: ''
+    },
+    {
+        prop: 'reportBody',
+        name: 'Body'
+    },
+    {
+        name: 'Date',
+        onRender: item => new Date(item.reportTime).toLocaleDateString()
+    },
+    {
+        prop: 'status',
+        name: 'Status'
     },
     {
         prop: 'regionId',
         name: 'Region ID'
     },
     {
-        prop: 'reportBody',
-        name: 'Report Body'
+        prop: 'agentId',
+        name: 'Agent ID'
     },
     {
-        prop: 'reportId',
-        name: 'Report ID'
-    },
-    {
-        prop: 'reportTime',
-        name: 'Report Time'
-    },
-    {
-        prop: 'status',
-        name: 'Status'
+        name: '',
+        onRender: (item) => <RegionSummariesModal item={item}/>
     }
 ];
 
