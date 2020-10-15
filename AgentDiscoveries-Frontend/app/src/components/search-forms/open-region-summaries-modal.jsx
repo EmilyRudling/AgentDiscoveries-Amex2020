@@ -25,7 +25,7 @@ export default class RegionSummariesModal extends React.Component {
         return (
             <div>
                 <Button bsStyle="primary" bsSize="small" onClick={this.handleShow}>
-                    Click me
+                    View
                 </Button>
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
@@ -33,17 +33,19 @@ export default class RegionSummariesModal extends React.Component {
                         <Modal.Title>Region Summary</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <h4>Agent ID:</h4>
-                        <p>{this.props.item.agentId}</p>
-                        <h4>Report Body:</h4>
-                        <p>{this.props.item.reportBody}</p>
-                        <h4>Report ID:</h4>
+                        <h4>ID:</h4>
                         <p>{this.props.item.reportId}</p>
-                        <h4>Time of Report:</h4>
+                        <h4>Body:</h4>
+                        <p>{this.props.item.reportBody}</p>
+                        <h4>Date and Time:</h4>
                         <p>{new Date(this.props.item.reportTime).toLocaleDateString()}</p>
                         <p>{new Date(this.props.item.reportTime).toLocaleTimeString()}</p>
                         <h4>Status:</h4>
                         <p>{this.props.item.status}</p>
+                        <h4>Region ID:</h4>
+                        <p>{this.props.item.regionId}</p>
+                        <h4>Agent ID:</h4>
+                        <p>{this.props.item.agentId}</p>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.handleClose}>Close</Button>

@@ -9,31 +9,31 @@ import RegionSummariesModal from "./open-region-summaries-modal";
 
 const COLS = [
     {
-        prop: 'agentId',
-        name: 'Agent ID'
-    },
-    {
-        prop: 'regionId',
-        name: 'Region ID'
+        prop: 'reportId',
+        name: ''
     },
     {
         prop: 'reportBody',
-        name: 'Report Body'
+        name: 'Body'
     },
     {
-        prop: 'reportId',
-        name: 'Report ID'
-    },
-    {
-        prop: 'reportTime',
-        name: 'Report Time'
+        name: 'Date',
+        onRender: item => new Date(item.reportTime).toLocaleDateString()
     },
     {
         prop: 'status',
         name: 'Status'
     },
     {
-        name: 'More Info',
+        prop: 'regionId',
+        name: 'Region ID'
+    },
+    {
+        prop: 'agentId',
+        name: 'Agent ID'
+    },
+    {
+        name: '',
         onRender: (item) => <RegionSummariesModal item={item}/>
     }
 ];
