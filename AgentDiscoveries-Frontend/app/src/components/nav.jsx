@@ -58,14 +58,7 @@ export default class NavigationBar extends React.Component {
             <Navbar.Collapse>
                 {this.state.isAdmin ? this.renderAdminOptions() : null}
                 <Nav>
-                    <NavDropdown eventKey={4} title='Submit' id='basic-nav-dropdown'>
-                        <MenuItem componentClass={Link} href='/submit/location' to='/submit/location' eventKey={4.1}>
-                            Location Report
-                        </MenuItem>
-                        <MenuItem componentClass={Link} href='/submit/region' to='/submit/region' eventKey={4.2}>
-                            Region Summary
-                        </MenuItem>
-                    </NavDropdown>
+                    {this.state.isAdmin ? null : this.renderSubmitForms()}
                     <NavItem componentClass={Link} href='/message' to='/message' eventKey={5}>
                         Today's Message
                     </NavItem>
@@ -102,6 +95,21 @@ export default class NavigationBar extends React.Component {
                     </MenuItem>
                     <MenuItem componentClass={Link} href='/search/region' to='/search/region' eventKey={3.2}>
                         Region Summaries
+                    </MenuItem>
+                </NavDropdown>
+            </Nav>
+        );
+    }
+
+    renderSubmitForms() {
+        return (
+            <Nav>
+                <NavDropdown eventKey={4} title='Submit' id='basic-nav-dropdown'>
+                    <MenuItem componentClass={Link} href='/submit/location' to='/submit/location' eventKey={4.1}>
+                        Location Report
+                    </MenuItem>
+                    <MenuItem componentClass={Link} href='/submit/region' to='/submit/region' eventKey={4.2}>
+                        Region Summary
                     </MenuItem>
                 </NavDropdown>
             </Nav>
