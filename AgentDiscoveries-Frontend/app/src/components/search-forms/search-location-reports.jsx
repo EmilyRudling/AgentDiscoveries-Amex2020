@@ -4,7 +4,8 @@ import QueryString from 'query-string';
 import moment from 'moment';
 import Message from '../message';
 import {apiGet} from '../utilities/request-helper';
-import ResultsTable from "../common/results-table";
+import ResultsTable from '../common/results-table';
+import LocationReportModal from './open-location-report-modal';
 
 const COLS = [
     {
@@ -30,6 +31,10 @@ const COLS = [
     {
         prop: 'status',
         name: 'Status'
+    },
+    {
+        name: 'More Info',
+        onRender: (item) => <LocationReportModal item={item}/>
     }
 ];
 
