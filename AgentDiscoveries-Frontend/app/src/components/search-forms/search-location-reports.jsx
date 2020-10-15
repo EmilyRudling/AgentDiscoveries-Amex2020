@@ -4,32 +4,33 @@ import QueryString from 'query-string';
 import moment from 'moment';
 import Message from '../message';
 import {apiGet} from '../utilities/request-helper';
-import ResultsTable from "../common/results-table";
+import ResultsTable from '../common/results-table';
+import LocationReportModal from './open-location-report-modal';
 
 const COLS = [
+    {
+        prop: 'reportId',
+        name: ''
+    },
+    {
+        prop: 'reportBody',
+        name: 'Body'
+    },
+    {
+        name: 'Date',
+        onRender: item => new Date(item.reportTime).toLocaleDateString()
+    },
+    {
+        prop: 'status',
+        name: 'Status'
+    },
     {
         prop: 'agentId',
         name: 'Agent ID'
     },
     {
-        prop: 'regionId',
-        name: 'Region ID'
-    },
-    {
-        prop: 'reportBody',
-        name: 'Report Body'
-    },
-    {
-        prop: 'reportId',
-        name: 'Report ID'
-    },
-    {
-        prop: 'reportTime',
-        name: 'Report Time'
-    },
-    {
-        prop: 'status',
-        name: 'Status'
+        name: '',
+        onRender: (item) => <LocationReportModal item={item}/>
     }
 ];
 
