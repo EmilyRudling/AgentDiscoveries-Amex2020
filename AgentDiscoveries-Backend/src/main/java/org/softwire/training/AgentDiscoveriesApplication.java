@@ -31,16 +31,13 @@ public class AgentDiscoveriesApplication implements Runnable {
 
     @Inject Configuration config;
     @Inject Flyway flyway;
-
     @Inject TokenRoutes tokenRoutes;
-
     @Inject AgentsRoutes agentsRoutes;
     @Inject LocationsRoutes locationsRoutes;
     @Inject RegionsRoutes regionsRoutes;
     @Inject LocationStatusReportsRoutes locationStatusReportsRoutes;
     @Inject RegionSummaryReportsRoutes regionSummaryReportsRoutes;
     @Inject UsersRoutes usersRoutes;
-    @Inject ExecutiveSummaryRoutes executiveSummaryRoutes;
     @Inject MessageProcessorRoutes messageProcessorRoutes;
     @Inject ExternalReportRoutes externalReportRoutes;
     @Inject PictureRoutes pictureRoutes;
@@ -63,11 +60,6 @@ public class AgentDiscoveriesApplication implements Runnable {
 
             path("/api", () -> {
                 before("/*", tokenRoutes::validateToken);
-
-                path("/legacy", () -> {
-                    before("/*", (request, response) -> response.type("text/plain"));
-                    path("/executivesummary", this::executivesSummaryGroup);
-                });
 
                 path("/pictures", this::picturesRouteGroup);
                 path("/agents", this::agentsRouteGroup);
@@ -99,13 +91,9 @@ public class AgentDiscoveriesApplication implements Runnable {
                 }
             });
         });
-
         get("/healthcheck", (req, res) -> "Server started okay!");
     }
 
-    private void executivesSummaryGroup() {
-        post("/generate", executiveSummaryRoutes::readExecutiveSummary);
-    }
 
     private void picturesRouteGroup() {
         get("/:id", (req, res) -> pictureRoutes.readProfilePicture(req, res, idParamAsInt(req)));
