@@ -8,6 +8,10 @@ import ResultsTable from "../common/results-table";
 
 const COLS = [
     {
+        prop: 'title',
+        name: 'Title'
+    },
+    {
         prop: 'agentId',
         name: 'Agent ID'
     },
