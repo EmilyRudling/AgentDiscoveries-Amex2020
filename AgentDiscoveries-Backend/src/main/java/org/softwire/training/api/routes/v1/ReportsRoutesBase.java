@@ -109,8 +109,7 @@ public abstract class ReportsRoutesBase<T extends ReportApiModelBase, U extends 
         Pager pager = new Pager(
                 reports.size(),
                 req.queryParams("page") == null ? 1 : Integer.parseInt(req.queryParams("page")),
-                req.queryParams("limit") == null ? 10 : Integer.parseInt(req.queryParams("limit")),
-                req.queryParams("maxPages") == null ? 10 : Integer.parseInt(req.queryParams("maxPages"))
+                req.queryParams("limit") == null ? 10 : Integer.parseInt(req.queryParams("limit"))
         );
 
         return reports

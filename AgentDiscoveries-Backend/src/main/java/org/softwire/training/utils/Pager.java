@@ -1,6 +1,6 @@
 package org.softwire.training.utils;
 
-import java.util.stream.IntStream;
+//import java.util.stream.IntStream;
 
 public class Pager {
 
@@ -10,49 +10,24 @@ public class Pager {
     private int totalPages;
     private int startPage;
     private int endPage;
-    private int startIndex;
-    private int endIndex;
-    private int[] pages;
 
-    public Pager(
-            int totalItems,
-            int currentPage,
-            int pageSize,
-            int maxPages
-    ) {
+    public Pager(int totalItems, int currentPage, int pageSize) {
 
-        int totalPages = (int) Math.ceil(totalItems / pageSize);
+        int totalPages = (int) Math.ceil(totalItems/pageSize);
+        int startPage = currentPage - 5;
+        int endPage = currentPage + 4;
 
-        if (currentPage < 1) {
-            currentPage = 1;
-        } else if (currentPage > totalPages) {
-            currentPage = totalPages;
+        if (startPage <= 0) {
+            endPage -= (startPage - 1);
+            startPage = 1;
         }
 
-        int startPage, endPage;
-        if (totalPages <= maxPages) {
-            startPage = 1;
+        if (endPage > totalPages) {
             endPage = totalPages;
-        } else {
-            int maxPagesBeforeCurrentPage = (int) Math.floor(maxPages / 2);
-            int maxPagesAfterCurrentPage = (int) Math.ceil(maxPages / 2) - 1;
-
-            if (currentPage <= maxPagesBeforeCurrentPage) {
-                startPage = 1;
-                endPage = maxPages;
-            } else if (currentPage + maxPagesAfterCurrentPage >= totalPages) {
-                startPage = totalPages - maxPages + 1;
-                endPage = totalPages;
-            } else {
-                startPage = currentPage - maxPagesBeforeCurrentPage;
-                endPage = currentPage + maxPagesAfterCurrentPage;
+            if (endPage > 10) {
+                startPage = endPage - 9;
             }
         }
-
-        int startIndex = (currentPage - 1) * pageSize;
-        int endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
-
-        int[] pages = IntStream.range(startPage, (endPage + 1) - startPage).toArray();
 
         this.totalItems = totalItems;
         this.currentPage = currentPage;
@@ -60,9 +35,6 @@ public class Pager {
         this.totalPages = totalPages;
         this.startPage = startPage;
         this.endPage = endPage;
-        this.startIndex = startIndex;
-        this.endIndex = endIndex;
-        this.pages = pages;
     }
 
     public int getTotalItems() {
@@ -87,17 +59,5 @@ public class Pager {
 
     public int getEndPage() {
         return endPage;
-    }
-
-    public int getStartIndex() {
-        return startIndex;
-    }
-
-    public int getEndIndex() {
-        return endIndex;
-    }
-
-    public int[] getPages() {
-        return pages;
     }
 }
