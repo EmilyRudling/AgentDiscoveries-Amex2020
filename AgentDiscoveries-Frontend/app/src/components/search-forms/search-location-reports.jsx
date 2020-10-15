@@ -9,6 +9,14 @@ import LocationReportModal from './open-location-report-modal';
 
 const COLS = [
     {
+        prop: 'title',
+        name: 'Title'
+    },
+    {
+        prop: 'agentId',
+        name: 'Agent ID'
+    },
+    {
         prop: 'reportId',
         name: ''
     },
