@@ -58,11 +58,11 @@ class PagerTest {
 
     @Test
     void startPageIsFivePagesBeforeCurrentPageAfterPageFive() {
-        pager = new Pager(200, 6, 10);
+        pager = new Pager(200, 7, 10);
 
         int startPage = pager.getStartPage();
 
-        assertEquals(1, startPage);
+        assertEquals(2, startPage);
     }
 
     @Test
