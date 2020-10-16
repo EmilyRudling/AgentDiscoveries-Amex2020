@@ -30,7 +30,7 @@ export default class LocationReportModal extends React.Component {
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Report Title</Modal.Title>
+                        <Modal.Title> {this.props.item.title} </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <h4>ID:</h4>
