@@ -40,7 +40,7 @@ const ResultsTable = ({cols, items}) => {
 
     const handleChangePage = currentItems => setCurrentItems(currentItems);
 
-    const renderHeader = ({prop, name}) => <Cell key={prop} isHeader children={name} />;
+    const renderHeader = ({name}, index) => <Cell key={index} isHeader children={name} />;
 
     const renderRow = (item, index) => {
         return (

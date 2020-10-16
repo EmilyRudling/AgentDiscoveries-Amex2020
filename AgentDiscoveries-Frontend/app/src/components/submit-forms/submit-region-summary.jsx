@@ -51,7 +51,7 @@ export default class RegionSummarySubmit extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Status</ControlLabel>
-                        <FormControl type='number' required
+                        <FormControl type='number' min={0} max={100} required
                             placeholder='Enter numeric status code'
                             value={this.state.status}
                             onChange={this.onStatusChange}
