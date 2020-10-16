@@ -1,0 +1,2 @@
+INSERT INTO `agentdiscoveries`.`agents` (`call_sign`, `first_name`, `last_name`, `date_of_birth`, `rank`) VALUES ('007', 'James', 'Bond', '1920-11-11', '4');
+INSERT INTO `agentdiscoveries`.`users` (`username`, `hashed_password`, `agent_id`, `admin`) VALUES ('james_bond', '$2a$10$NuLITmF7yiX1ed6b.umRJuqoR9Orjbn3NfmEgx71KjDlv0oB8jnPy', '2', '0');
