@@ -9,6 +9,7 @@ import org.softwire.training.db.daos.ReportsDao;
 import org.softwire.training.db.daos.UsersDao;
 import org.softwire.training.db.daos.searchcriteria.ReportSearchCriterion;
 import org.softwire.training.models.ReportBase;
+import org.softwire.training.utils.Pager;
 import spark.Request;
 import spark.Response;
 import spark.utils.StringUtils;
@@ -100,9 +101,21 @@ public abstract class ReportsRoutesBase<T extends ReportApiModelBase, U extends 
     public List<T> searchReports(Request req, Response res) {
         permissionsVerifier.verifyAdminPermission(req);
 
-        return reportsDao.searchReports(parseSearchCriteria(req))
+        List<T> reports = reportsDao.searchReports(parseSearchCriteria(req))
                 .stream()
                 .map(this::mapToApiModel)
+                .collect(Collectors.toList());
+
+        Pager pager = new Pager(
+                reports.size(),
+                req.queryParams("page") == null ? 1 : Integer.parseInt(req.queryParams("page")),
+                req.queryParams("limit") == null ? 10 : Integer.parseInt(req.queryParams("limit"))
+        );
+
+        return reports
+                .stream()
+                .skip((pager.getCurrentPage() - 1) * pager.getPageSize())
+                .limit(pager.getPageSize())
                 .collect(Collectors.toList());
     }
 }
