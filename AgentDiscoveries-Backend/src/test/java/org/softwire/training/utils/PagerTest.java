@@ -36,21 +36,39 @@ class PagerTest {
     }
 
     @Test
-    void getTotalPages() {
+    void calculatesNumOfPages() {
         int totalPages = pager.getTotalPages();
 
         assertEquals(10, totalPages);
     }
 
     @Test
-    void getStartPage() {
+    void calculatesStartPage() {
         int startPage = pager.getStartPage();
 
         assertEquals(1, startPage);
     }
 
     @Test
-    void getEndPage() {
+    void calculatesEndPage() {
+        int endPage = pager.getEndPage();
+
+        assertEquals(10, endPage);
+    }
+
+    @Test
+    void startPageCanNotBeLessThanOne() {
+        pager = new Pager(100, 0, 10);
+
+        int startPage = pager.getStartPage();
+
+        assertEquals(1, startPage);
+    }
+
+    @Test
+    void endPageCanNotBeGreaterThanTotalPages() {
+        pager = new Pager(100, 11, 10);
+
         int endPage = pager.getEndPage();
 
         assertEquals(10, endPage);
