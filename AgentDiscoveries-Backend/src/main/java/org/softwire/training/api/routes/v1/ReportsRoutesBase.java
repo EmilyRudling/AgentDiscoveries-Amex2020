@@ -106,9 +106,12 @@ public abstract class ReportsRoutesBase<T extends ReportApiModelBase, U extends 
                 .map(this::mapToApiModel)
                 .collect(Collectors.toList());
 
+        if (req.queryParams("page") == null)
+            return reports;
+
         Pager pager = new Pager(
                 reports.size(),
-                req.queryParams("page") == null ? 1 : Integer.parseInt(req.queryParams("page")),
+                Integer.parseInt(req.queryParams("page")),
                 req.queryParams("limit") == null ? 10 : Integer.parseInt(req.queryParams("limit"))
         );
 
